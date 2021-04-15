@@ -23,7 +23,10 @@
 			<table class="table table-striped" style="text-align:center;border:1px;">
 				<thead>
 					<tr>
-						<th colspan="3" style="background-color:#eeeeee;text-align:center;"></th>
+						<th colspan="3" style="background-color:#eeeeee;text-align:center;">No. <%=dto.getNum() %></th>
+					</tr>
+					<tr>
+						<td style="font-size:11px;"><%=dto.getCount()%> views</td>
 					</tr>
 				</thead>
 				
@@ -38,7 +41,7 @@
 						<td>Attached File</td><td colspan="2" style="text-align:left;"><%=dto.getFile() %></td>
 					</tr>
 					<tr>
-						<td>Content</td><td colspan="2" style="height:300px;text-align:left;"><%=dto.getContents() %></td>
+						<td>Content</td><td colspan="2" style="height:300px;text-align:left;"><textarea cols="150" rows="20"><%=dto.getContents() %></textarea></td>
 					</tr>
 				</tbody>
 				

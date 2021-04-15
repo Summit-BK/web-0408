@@ -69,7 +69,7 @@ public class BoardDao {
 		
 	}
 	public int write(BoardDto dto) {
-		String SQL = "insert into board values(?,?,?,?,?,?,?)";
+		String SQL = "insert into board values(?,?,?,?,?,?,?,?)";
 		
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -80,7 +80,8 @@ public class BoardDao {
 			pstmt.setString(5, getDate());
 			pstmt.setInt(6, dto.getAvailable());
 			pstmt.setString(7, dto.getFile());
-		
+			pstmt.setInt(8, 0);
+			
 			pstmt.executeUpdate();
 			return 1;
 		}
@@ -94,7 +95,7 @@ public class BoardDao {
 	public ArrayList<BoardDto> getBoardList(){
 			
 		ArrayList<BoardDto> list = new ArrayList<>();
-		String SQL = "select *from board where board_available=1";
+		String SQL = "select *from board";
 		
 		try{
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -124,8 +125,12 @@ public class BoardDao {
 			
 			
 			if(rs.next()) {
+				int count= rs.getInt(8)+1;
+				String SQL2= "update board set board_count="+count+" where board_num="+num;
+				PreparedStatement pstmt2 = conn.prepareStatement(SQL2);
+				pstmt2.executeUpdate();
 				
-				BoardDto dto = new BoardDto(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getString(7));
+				BoardDto dto = new BoardDto(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getString(7),count);
 				return dto;
 			}
 			return null;
@@ -139,10 +144,17 @@ public class BoardDao {
 	}
 	
 	public int hideBoard(int num) {
-		String SQL="update board set board_available = 0 where board_num = ?";
+//		String SQL="update board set board_available = 0 where board_num = ?";
+		String SQL="delete from board where board_num = ?";
 		
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+			
+			SQL = "update board set board_num=board_num-1 where board_num>?";
+			
+			pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, num);
 			pstmt.executeUpdate();
 			
@@ -173,6 +185,33 @@ public class BoardDao {
 			e.printStackTrace();
 		}
 		return -1;
+	}
+	
+	public ArrayList<BoardDto> getBoardSearch(String key,String keyword){
+		
+		ArrayList<BoardDto> list = new ArrayList<>();
+
+		String SQL = "select *from board where "+key+" like '%"+keyword+"%'";
+		//String SQL = "select *from board where board_title like '%aaa%'";
+		
+		try{
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+		
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				list.add(new BoardDto(rs.getInt(1), rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getString(7)));
+			}
+			
+			return list;
+		}
+		
+		catch(Exception e) {
+			e.printStackTrace();
+			
+		}
+		return list;
 	}
 	
 }

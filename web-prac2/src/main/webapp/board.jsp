@@ -10,8 +10,18 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta charset="EUC-KR">
 <title>Insert title here</title>
+<style type="text/css">
+	form table,tr,td{
+		
+		padding:15px;
+	
+	
+	
+</style>
+
 </head>
 <body>
+	
 	<div class="container">
 		<div>
 			<table class="table table-striped" style="text-align:center;border:1px;">
@@ -25,8 +35,23 @@
 				</thead>
 				<tbody>
 				<%
+					request.setCharacterEncoding("EUC-KR");
+					String key = request.getParameter("key");
+					String keyword = request.getParameter("keyword");
+					
+				
 					BoardDao dao= BoardDao.getInstance();
-					ArrayList<BoardDto> list= dao.getBoardList();
+					ArrayList<BoardDto> list= new ArrayList<>();
+					if(key==null || keyword.equals("")){
+						list=dao.getBoardList();
+						
+					}
+					
+					else{
+						list=dao.getBoardSearch(key,keyword);
+						
+					}
+					
 					for (int i=0;i<list.size();i++){
 						BoardDto dto=list.get(i);
 						%>
@@ -49,9 +74,33 @@
 				</tbody>
 			
 			</table>
-			<div class="nav justify-content-end">
-				<a href="boardwrite.jsp" class="btn btn-primary">Write a Post</a>
-			</div>
+			<form action="board.jsp" method="post">
+				<table style="float:right;">
+					<tr>
+						<td>
+							<select name="key">
+								<option value="board_title">title</option>
+								<option value="board_contents">contents</option>
+								<option value="board_userID">userID</option>
+							</select>
+						</td>
+						<td>
+							<input type="text" name="keyword" placeholder="Search">
+							<input type="submit" name="btnsearch" value="Search">	
+							
+				
+						</td>
+						<td>
+							<a href="boardwrite.jsp" class="btn btn-primary" >Write a Post</a>
+						</td>
+					</tr>
+					
+				</table>
+				
+				
+			</form>
+			
+			
 			
 		</div>
 	</div>

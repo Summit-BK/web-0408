@@ -10,8 +10,16 @@ public class BoardDto {
 	private String date;
 	private int available;
 	private String file;
+	private int count;
 	
-	
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
 	public BoardDto(int num, String title, String contents, String userID, String date, int available, String file) {
 		this.num=num;
 		this.title=title;
@@ -20,6 +28,18 @@ public class BoardDto {
 		this.date=date;
 		this.available=available;
 		this.file=file;
+		
+	}
+	
+	public BoardDto(int num, String title, String contents, String userID, String date, int available, String file, int count) {
+		this.num=num;
+		this.title=title;
+		this.contents=contents;
+		this.userID=userID;
+		this.date=date;
+		this.available=available;
+		this.file=file;
+		this.count=count;
 		
 	}
 	

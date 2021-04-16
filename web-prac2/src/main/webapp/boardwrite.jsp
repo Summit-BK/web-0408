@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div class="container">
-		<form action="boardwriteController.jsp" method="post">
+		<form action="boardwriteController.jsp" method="post" enctype="multipart/form-data">
 			<table class="table table-striped" style="text-align:center;border:1px;">
 				<thead>
 					<tr>

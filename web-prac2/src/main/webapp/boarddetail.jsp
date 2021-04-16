@@ -81,7 +81,7 @@
 				</tbody>
 			
 			</table>
-			<div class="nav justify-content-end gap-2">
+			<div class="nav justify-content-end gap-2"> 
 				
 				<input type="submit" value="Submit" class="btn btn-primary">
 				<a href="board.jsp" class="btn btn-primary">Cancel</a>

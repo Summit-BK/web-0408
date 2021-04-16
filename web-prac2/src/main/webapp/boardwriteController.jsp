@@ -16,17 +16,18 @@
 <body>
 	<%
 	
-		ServletContext context = getServletContext();
-		String realFolder = context.getRealPath("upload");
+	
+		String realFolder = "C:/Users/User/Desktop/BK/Front/src/main/webapp/upload";
+		
 		
 		MultipartRequest multi = new MultipartRequest(request, realFolder, 1024*1024*10, "UTF-8", new DefaultFileRenamePolicy());
 	
 		request.setCharacterEncoding("EUC-KR");
 	
-		String title = request.getParameter("title");
-		String contents = request.getParameter("contents");
+		String title = multi.getParameter("title");
+		String contents = multi.getParameter("contents");
+		String file = multi.getFilesystemName("file");
 		
-		//String file = request.getParameter("file");
 		BoardDto boardDto = new BoardDto();
 		
 		boardDto.setTitle(title);

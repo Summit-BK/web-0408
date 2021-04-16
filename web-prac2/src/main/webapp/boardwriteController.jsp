@@ -1,4 +1,5 @@
 
+<%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="dao.BoardDao"%>
 <%@page import="dto.BoardDto"%>

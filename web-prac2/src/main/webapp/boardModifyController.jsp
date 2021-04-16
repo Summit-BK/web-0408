@@ -1,3 +1,5 @@
+<%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
+<%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@page import="dto.BoardDto"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="dao.BoardDao"%>
@@ -14,12 +16,21 @@
 <body>
 
 <%
-	request.setCharacterEncoding("EUC-KR");
-	int num = Integer.parseInt(request.getParameter("num"));
-	String title = request.getParameter("title");
-	String contents = request.getParameter("contents");
-	String file = "modifiedFile";
+	String realFolder = "C:/Users/User/git/web-0408_4/web-prac2/src/main/webapp/upload";
+	MultipartRequest multi = new MultipartRequest(request, realFolder,1024*1024*10,"EUC-KR", new DefaultFileRenamePolicy());
 
+	
+
+int num = Integer.parseInt(request.getParameter("num"));
+	String title = multi.getParameter("title");
+	String contents = multi.getParameter("contents");
+	String file = multi.getFilesystemName("file");
+
+	if(file == null){
+		file = multi.getParameter("file2");
+		
+	}
+	
 	BoardDao dao = BoardDao.getInstance();
 	int result = dao.modifyBoard(num,title,contents,file);
 	if(result == 1){

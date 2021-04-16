@@ -38,10 +38,11 @@
 						<td>Author</td><td colspan="2" style="text-align:left;"><%=dto.getUserID() %></td>
 					</tr>
 					<tr>
-						<td>Attached File</td><td colspan="2" style="text-align:left;"><%=dto.getFile() %></td>
+						<td>Attached File</td><td colspan="2" style="text-align:left;"><a href="fileController.jsp?file=<%=dto.getFile()%>"><%=dto.getFile() %></a></td>
+						
 					</tr>
 					<tr>
-						<td>Content</td><td colspan="2" style="height:300px;text-align:left;"><textarea cols="150" rows="20"><%=dto.getContents() %></textarea></td>
+						<td>Content</td><td colspan="2" style="height:300px;text-align:left;"><img alt="" src="upload/<%=dto.getFile()%>" height="100%" style="margin-bottom:10px"><textarea cols="150" rows="20"><%=dto.getContents() %></textarea></td>
 					</tr>
 				</tbody>
 				
@@ -54,6 +55,38 @@
 		</div>	
 		
 	
+	</div>
+	
+	<!-- ////////////////////////////////////////////////////////////////////// -->
+	<div class="container mt-5">
+		<form action="replyController.jsp" method="post">
+			<table class="table table-striped" style="text-align:center;border:1px;">
+				<thead>
+					<tr>
+						
+						<th style="background-color:#eeeeee;text-align:center" colspan="2">Reply</th>
+						
+						
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						
+						
+						<td><textarea cols="150" rows="1" name="contents" colspan="2"></textarea></td>
+						
+						
+					
+					</tr>
+				</tbody>
+			
+			</table>
+			<div class="nav justify-content-end gap-2">
+				
+				<input type="submit" value="Submit" class="btn btn-primary">
+				<a href="board.jsp" class="btn btn-primary">Cancel</a>
+			</div>
+		</form>
 	</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>

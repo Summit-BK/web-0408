@@ -1,4 +1,5 @@
 
+<%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="dao.BoardDao"%>
@@ -17,24 +18,27 @@
 	<%
 	
 	
-		String realFolder = "C:/Users/User/Desktop/BK/Front/src/main/webapp/upload";
-		
-		
-		MultipartRequest multi = new MultipartRequest(request, realFolder, 1024*1024*10, "UTF-8", new DefaultFileRenamePolicy());
+		String realFolder = "C:/Users/User/git/web-0408_4/web-prac2/src/main/webapp/upload";
+
+		MultipartRequest multi = new MultipartRequest(request, realFolder, 1024*1024*10, "EUC-KR",  new DefaultFileRenamePolicy()  );
 	
-		request.setCharacterEncoding("EUC-KR");
+
 	
 		String title = multi.getParameter("title");
 		String contents = multi.getParameter("contents");
 		String file = multi.getFilesystemName("file");
-		
+		if(file==null){
+			file="";
+			
+		}
+
 		BoardDto boardDto = new BoardDto();
 		
 		boardDto.setTitle(title);
 		boardDto.setContents(contents);
 		boardDto.setUserID("Bob");
 		boardDto.setAvailable(1);
-		boardDto.setFile("file");
+		boardDto.setFile(file);
 
 		BoardDao dao = BoardDao.getInstance();
 		

@@ -28,6 +28,7 @@
 				<thead>
 					<tr>
 						<th style="background-color:#eeeeee;text-align:center">No.</th>
+				
 						<th style="background-color:#eeeeee;text-align:center">Title</th>
 						<th style="background-color:#eeeeee;text-align:center">Author</th>
 						<th style="background-color:#eeeeee;text-align:center">Date</th>
@@ -57,7 +58,8 @@
 						%>
 						<tr onclick="location.href='boarddetail.jsp?num='+<%=dto.getNum()%>">
 						<td><%=dto.getNum() %></td>
-						<td><%=dto.getTitle() %></td>
+						
+						<td><%=dto.getTitle() %>   <img alt="" src="upload/<%=dto.getFile() %>" width="50px"></td>
 						<td><%=dto.getUserID() %></td>
 						<td><%=dto.getDate() %></td>
 						

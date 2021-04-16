@@ -1,3 +1,4 @@
+<%@page import="java.io.File"%>
 <%@page import="dto.BoardDto"%>
 
 <%@page import="dao.BoardDao"%>
@@ -15,11 +16,15 @@
 
 <%
 	int num = Integer.parseInt(request.getParameter("num"));
+	BoardDao dao = BoardDao.getInstance();
 	
+	BoardDto dto = dao.getBoard(num);
+	
+	File file = new File("C:/Users/User/git/web-0408_4/web-prac2/src/main/webapp/upload/"+dto.getFile());
 	
 %>
 	<div class="container">
-		<form action="boardModifyController.jsp?num=<%=num%>" method="post">
+		<form action="boardModifyController.jsp?num=<%=num%>" method="post" enctype="multipart/form-data">
 			<table class="table table-striped" style="text-align:center;border:1px;">
 				<thead>
 					<tr>
@@ -32,8 +37,8 @@
 				<tbody>
 					<tr>
 						
-						<td><input type="text" name="title"></td>
-						<td><textarea cols="60" rows="6" name="contents"></textarea></td>
+						<td><input type="text" name="title" value="<%=dto.getTitle() %>"></td>
+						<td><textarea cols="60" rows="6" name="contents"><%=dto.getContents() %></textarea></td>
 						
 						
 					
@@ -43,6 +48,7 @@
 			</table>
 			<div class="nav justify-content-end gap-2">
 				<input type="file" name="file" class="me-auto">
+				<input type="hidden" name="file2" value="<%=dto.getFile() %>">
 				<input type="submit" value="Submit" class="btn btn-primary">
 				<a href="board.jsp" class="btn btn-primary">Cancel</a>
 			</div>

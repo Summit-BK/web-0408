@@ -14,6 +14,12 @@
 </head>
 <body>
 	<%
+	
+		ServletContext context = getServletContext();
+		String realFolder = context.getRealPath("upload");
+		
+		MultipartRequest multi = new MultipartRequest(request, realFolder, 1024*1024*10, "UTF-8", new DefaultFileRenamePolicy());
+	
 		request.setCharacterEncoding("EUC-KR");
 	
 		String title = request.getParameter("title");

@@ -16,7 +16,7 @@
 <body>
 
 <%
-	String realFolder = "C:/Users/User/git/web-0408_4/web-prac2/src/main/webapp/upload";
+	String realFolder = "/upload";
 	MultipartRequest multi = new MultipartRequest(request, realFolder,1024*1024*10,"EUC-KR", new DefaultFileRenamePolicy());
 
 	

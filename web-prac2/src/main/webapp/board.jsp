@@ -21,7 +21,12 @@
 
 </head>
 <body>
-	
+	<%
+		int pagenumber = 1;
+		if(request.getParameter("pagenumber")!=null){
+			pagenumber = Integer.parseInt(request.getParameter("pagenumber"));
+		}
+	%>
 	<div class="container">
 		<div>
 			<table class="table table-striped" style="text-align:center;border:1px;">
@@ -44,7 +49,7 @@
 					BoardDao dao= BoardDao.getInstance();
 					ArrayList<BoardDto> list= new ArrayList<>();
 					if(key==null || keyword.equals("")){
-						list=dao.getBoardList();
+						list=dao.getBoardList(pagenumber);
 						
 					}
 					
@@ -76,6 +81,21 @@
 				</tbody>
 			
 			</table>
+			<%
+				if(pagenumber != 1){
+					%>
+					<a href="board.jsp?pagenumber=<%=pagenumber-1 %>" class="btn btn-success btn-arrow-left">previous</a>
+					<%
+				}
+				
+				if(dao.nextPage(pagenumber+1)){
+					
+					%>
+					<a href="board.jsp?pagenumber=<%=pagenumber+1 %>" class="btn btn-success btn-arrow-right">next</a>
+					<%
+				}
+			%>
+			
 			<form action="board.jsp" method="post">
 				<table style="float:right;">
 					<tr>

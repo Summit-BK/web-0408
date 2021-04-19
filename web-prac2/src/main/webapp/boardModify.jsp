@@ -20,7 +20,7 @@
 	
 	BoardDto dto = dao.getBoard(num);
 	
-	File file = new File("C:/Users/User/git/web-0408_4/web-prac2/src/main/webapp/upload/"+dto.getFile());
+
 	
 %>
 	<div class="container">

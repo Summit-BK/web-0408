@@ -16,7 +16,7 @@
 <body>
 
 <%
-	String realFolder = "/upload";
+	String realFolder = request.getServletContext().getRealPath("upload");
 	MultipartRequest multi = new MultipartRequest(request, realFolder,1024*1024*10,"EUC-KR", new DefaultFileRenamePolicy());
 
 	

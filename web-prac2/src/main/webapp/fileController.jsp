@@ -16,8 +16,8 @@
 
 	<%
 		String filename = request.getParameter("file");
-		
-		File file = new File("C:/Users/User/git/web-0408_4/web-prac2/src/main/webapp/upload/"+filename);
+		String realFolder = request.getServletContext().getRealPath("upload");
+		File file = new File(realFolder+"/"+filename);
 		
 		response.setHeader("Content-Disposition", "attachment;filename="+filename+";");
 		

@@ -92,13 +92,14 @@ public class BoardDao {
 		return -1;
 	}
 	
-	public ArrayList<BoardDto> getBoardList(){
+	public ArrayList<BoardDto> getBoardList(int pagenumber){
 			
 		ArrayList<BoardDto> list = new ArrayList<>();
-		String SQL = "select *from board";
+		String SQL = "select *from board where board_num<? order by board_num desc limit 10";
 		
 		try{
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, getNextNum()-(pagenumber-1)*10);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -191,7 +192,8 @@ public class BoardDao {
 		
 		ArrayList<BoardDto> list = new ArrayList<>();
 
-		String SQL = "select *from board where "+key+" like '%"+keyword+"%'";
+//		String SQL = "select *from board where "+key+"='"+keyword+"'";
+				String SQL = "select *from board where "+key+" like '%"+keyword+"%'";
 		//String SQL = "select *from board where board_title like '%aaa%'";
 		
 		try{
@@ -212,6 +214,24 @@ public class BoardDao {
 			
 		}
 		return list;
+	}
+	
+	public boolean nextPage(int pagenumber) {
+		
+		String SQL = "select * from board where board_num <?";
+		
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, getNextNum()-(pagenumber-1)*10);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return true;
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 }

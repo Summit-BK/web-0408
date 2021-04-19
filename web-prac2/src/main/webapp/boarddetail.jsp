@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="dto.ReplyDto"%>
+<%@page import="dao.ReplyDao"%>
 <%@page import="dto.BoardDto"%>
 <%@page import="dao.BoardDao"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
@@ -59,7 +62,7 @@
 	
 	<!-- ////////////////////////////////////////////////////////////////////// -->
 	<div class="container mt-5">
-		<form action="replyController.jsp" method="post">
+		<form action="replyController.jsp?num=<%=dto.getNum() %>" method="post">
 			<table class="table table-striped" style="text-align:center;border:1px;">
 				<thead>
 					<tr>
@@ -87,6 +90,33 @@
 				<a href="board.jsp" class="btn btn-primary">Cancel</a>
 			</div>
 		</form>
+	</div>
+	
+	<div class="container">
+		<div>
+			<table class="table table-striped" style="text-align:center;border:1px;">
+				
+					<%
+						ReplyDao replyDao = ReplyDao.getInstance();
+										
+						ArrayList<ReplyDto> list = replyDao.getReplyList(dto.getNum());
+						
+						for (int i=0;i<list.size();i++){
+							%>
+							<tr>
+								<td><%=list.get(i).getReply_userid() %></td><td><%=list.get(i).getReply_contents() %></td>
+							</tr>
+							<%
+							
+							
+						}
+						
+						
+					%> 
+				
+			</table>
+		</div>
+		
 	</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>

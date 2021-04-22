@@ -29,17 +29,23 @@ main {
 
 <body class="text-center">
 <%@include file="../menu.jsp" %>
+<%
+	int loginfail = 0;
+	if(request.getParameter("loginfail")!=null){
+		loginfail = Integer.parseInt(request.getParameter("loginfail"));
+	}
+%>
 <main class="form-signin">
-  <form>
+  <form action="loginController.jsp" method="post">
 
     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
     <div class="form-floating">
-      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-      <label for="floatingInput">Email address</label>
+      <input type="text" class="form-control" id="floatingInput" placeholder="ID" name="id">
+      <label for="floatingInput">ID</label>
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
       <label for="floatingPassword">Password</label>
     </div>
 
@@ -49,6 +55,7 @@ main {
       </label>
     </div>
     <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+    <p style="color:red;"><%if(loginfail==1){out.print("Login failed. Please check your information");} %></p>
     <p class="mt-5 mb-3 text-muted">© 2017–2021</p>
   </form>
 </main>
@@ -56,6 +63,6 @@ main {
 
     
   
-
+<%@ include file="footer.jsp" %>
 </body>
 </html>

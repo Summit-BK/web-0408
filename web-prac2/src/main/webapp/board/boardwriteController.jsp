@@ -35,7 +35,7 @@
 		
 		boardDto.setTitle(title);
 		boardDto.setContents(contents);
-		boardDto.setUserID("Bob");
+		boardDto.setUserID(user);
 		boardDto.setAvailable(1);
 		boardDto.setFile(file);
 

@@ -49,8 +49,10 @@
 				
 			</table>
 			<div class="nav justify-content-end gap-2">
+				<% if(dto.getUserID().equals(user)){ %>
 				<a href="boardModify.jsp?num=<%=dto.getNum() %>" class="btn btn-primary">Modify</a>
 				<a href="boardDeleteController.jsp?num=<%=dto.getNum() %>" class="btn btn-primary">Delete</a>		
+				<%} %>
 				<a href="board.jsp" class="btn btn-primary">List</a>	
 			</div>	
 		</div>	

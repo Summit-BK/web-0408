@@ -10,10 +10,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%@ include file="../menu.jsp" %>	
+	
 	<%
 		request.setCharacterEncoding("UTF-8");
-		
+		String user = (String) session.getAttribute("user");
 		String contents = request.getParameter("contents");
 		int num = Integer.parseInt(request.getParameter("num"));
 		
@@ -22,7 +22,7 @@
 		
 		replyDto.setBoard_num(num);
 		replyDto.setReply_contents(contents);
-		replyDto.setReply_userid("Bob");
+		replyDto.setReply_userid(user);
 		
 		int result = replyDao.re_write(replyDto);
 		if(result == 1){
@@ -44,6 +44,6 @@
 	
 	%>
 	
-<%@ include file="../footer.jsp" %>	
+
 </body>
 </html>

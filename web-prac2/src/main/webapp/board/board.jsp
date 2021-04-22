@@ -112,7 +112,8 @@
 				
 						</td>
 						<td>
-							<a href="boardwrite.jsp" class="btn btn-primary" >Write a Post</a>
+							<%if(user!=null){ %>
+							<a href="boardwrite.jsp" class="btn btn-primary" >Write a Post</a><%} %>
 						</td>
 					</tr>
 					

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import dto.ProductDto;
 
@@ -57,7 +58,26 @@ public class ProductDao {
 		}
 		return -1;
 	}
-	
+	public ArrayList<ProductDto> getAllProductList(){
+		ArrayList<ProductDto> list = new ArrayList<>();
+		String SQL = "select * from product";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				ProductDto temp = new ProductDto(rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getInt(7),rs.getString(8),rs.getInt(9),rs.getInt(10));
+				list.add(temp);
+			}
+			return list;
+		
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+		
+	}
 	
 	
 }

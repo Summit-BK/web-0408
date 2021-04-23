@@ -24,7 +24,7 @@
 	
 		<div class="row">
 			<div class="col-3">
-			
+				<%@ include file="../adminsidebar.jsp" %>
 			
 			</div>
 			<div class="col-6">

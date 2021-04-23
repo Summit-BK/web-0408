@@ -38,13 +38,23 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<div class="collapse navbar-collapse ms-auto" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item">
 						<a class="nav-link active" aria-current="page" href="http://localhost:6060/web-prac2/main.jsp">Home</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="http://localhost:6060/web-prac2/board/board.jsp">Board</a>
+					</li>
+					
+					
+				</ul>
+				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<% if(user!=null){ %><a href="#" class="nav-link">Hello, <%=user %></a><%} %>
+					</li>
+					<li class="nav-item">
+						<a href="#" class="nav-link"><img alt="" src="images/shoppingcart.png" height="30px";></a>
 					</li>
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
@@ -64,9 +74,11 @@
 							<%} %>
 						</ul>
 					</li>
+					
+					
 				</ul>
 			</div>
-			<% if(user!=null){ %><p>Hello, <%=user %></p><%} %>
+			
 		</div>
 	
 	</div>

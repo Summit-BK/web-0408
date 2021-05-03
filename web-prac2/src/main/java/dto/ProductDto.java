@@ -12,7 +12,18 @@ public class ProductDto {
 	private String file;
 	private int activation;
 	private int soldcount1;
+	private int cartamount;
 	
+	public int getCartamount() {
+		return cartamount;
+	}
+
+
+	public void setCartamount(int cartamount) {
+		this.cartamount = cartamount;
+	}
+
+
 	public ProductDto() {
 		
 	}

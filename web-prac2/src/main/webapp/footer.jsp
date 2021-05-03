@@ -75,7 +75,66 @@
 		
 	}
 </script>
-
+<script type="text/javascript">
+	var sell_price;
+	var amount;
+	function init(){
+		sell_price = document.form.sell_price.value;
+		amount = document.form.amount.value;
+		
+		document.form.sum.value = sell_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		
+		
+	}
+	
+	function increase(){
+		hm = document.form.amount;
+		sum = document.form.sum;
+		if(hm.value >= parseInt(document.form.stock.value)){
+			return;
+			
+		}
+		hm.value++;
+		sum.value = (parseInt(hm.value)*sell_price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+	function decrease(){
+		hm = document.form.amount;
+		sum = document.form.sum;
+		if(hm.value>1){
+			hm.value--;
+		}
+		sum.value = (parseInt(hm.value)*sell_price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		
+		
+	}
+	
+	function addtocart(){
+		if(confirm("Would you like to add the item to your shopping cart?")){
+			form.submit();
+			
+			
+			
+		}
+		else{
+			form.reset();
+		}
+		
+	}
+	
+</script>
+<script type="text/javascript">
+	function deletecartproduct(id){
+		if(confirm('Really delete the item from the cart?')){
+			location.href='deletecartproductController.jsp?id='+id;	
+		}
+		
+	}
+	function deletecart(){
+		if(confirm('Really delete all items from the cart?')){
+			location.href='deletecartController.jsp';
+		}
+	}
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 </body>
 </html>

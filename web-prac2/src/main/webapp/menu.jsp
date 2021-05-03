@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -23,6 +24,8 @@
 </head>
 <body>
 <%
+	DecimalFormat df = new DecimalFormat("###,### won");
+
 	String user = null;
 	if(session.getAttribute("user")!=null){
 		user = (String) session.getAttribute("user");	
@@ -53,9 +56,7 @@
 					<li class="nav-item">
 						<% if(user!=null){ %><a href="#" class="nav-link">Hello, <%=user %></a><%} %>
 					</li>
-					<li class="nav-item">
-						<a href="#" class="nav-link"><img alt="" src="images/shoppingcart.png" height="30px";></a>
-					</li>
+				
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -65,6 +66,7 @@
 							%>
 							<li><a class="dropdown-item" href="http://localhost:6060/web-prac2/login.jsp">login</a></li>
 							<li><a class="dropdown-item" href="http://localhost:6060/web-prac2/signup.jsp">Sign up</a></li>
+							<li><a href="http://localhost:6060/web-prac2/product/cart.jsp" class="dropdown-item"><img alt="" src="http://localhost:6060/web-prac2/images/shoppingcart.png" height="30px"></a></li>
 							<%}else{ %>
 							<li><a class="dropdown-item" href="http://localhost:6060/web-prac2/logoutController.jsp">logout</a></li>
 								<%if(user.equals("admin")){ %>

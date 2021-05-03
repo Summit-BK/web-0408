@@ -66,6 +66,7 @@ public class ProductDao {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				ProductDto temp = new ProductDto(rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getInt(7),rs.getString(8),rs.getInt(9),rs.getInt(10));
+				temp.setId(rs.getInt(1));
 				list.add(temp);
 			}
 			return list;
@@ -76,6 +77,30 @@ public class ProductDao {
 			e.printStackTrace();
 		}
 		return list;
+		
+	}
+	
+	public ProductDto getProduct(int id){
+		
+		String SQL = "select * from product where product_id=?";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				ProductDto temp = new ProductDto(rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getInt(7),rs.getString(8),rs.getInt(9),rs.getInt(10));
+				temp.setId(id);
+				return temp;
+			}
+			return null;
+		
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 		
 	}
 	

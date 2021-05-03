@@ -52,7 +52,7 @@
 
 <body>
 <%@include file="menu.jsp" %>
-	<% DecimalFormat df = new DecimalFormat("###,### Won"); %>
+	
 	<%
 		ProductDao dao = ProductDao.getInstance();
 		
@@ -71,7 +71,7 @@
 				<% for(int i=0;i<plist.size();i++){ %>
 			
 				<li>
-					<a href="productlistController.jsp"><img alt="" src="upload/<%=plist.get(i).getFile() %>" height="250px"></a>
+					<a href="product/productview.jsp?id=<%=plist.get(i).getId() %>"><img alt="" src="upload/<%=plist.get(i).getFile() %>" height="250px"></a>
 					<div class="goods_info" style="text-align:left;">
 						<span class="manufacturer"><%=plist.get(i).getManufacturer() %></span><br>
 						<a href="productlistController.jsp" style="float:left;text-decoration:none;"><span class="name" style="color:black;"><%=plist.get(i).getName() %></span></a>
